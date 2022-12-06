@@ -1,0 +1,35 @@
+<h2 class="py-3 text-center">LogIn</h2>
+<b class="ps-3">Selección de usuario</b>
+<form [formGroup]="formularioReactivo" (ngSubmit)="seleccionarUsuario()">
+  <div class="ps-5 pt-4">
+    <mat-form-field appearance="fill">
+      <mat-label>Usuario</mat-label>
+      <mat-select [formControl]="selected" [errorStateMatcher]="matcher">
+        <mat-option>Sin usuario</mat-option>
+        <mat-option *ngFor="let us of usuarios" [value]="us.id">{{
+          us.nombre
+          }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="selected.hasError('required')">Debes seleccionar el usuario actual</mat-error>
+      <mat-error *ngIf="selected.hasError('pattern') && !selected.hasError('required')">
+        Usuario invalido
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Contraseña</mat-label>
+      <input matInput [formControl]="contrasenna" />
+    </mat-form-field>
+  </div>
+  <div class="py-4" mat-dialog-actions align="end">
+    <button class="btn btn-outline-primary" mat-raised-button (click)="seleccionarUsuario()">
+      <mat-icon>done</mat-icon>
+      Ingresar
+    </button>
+    <button class="btn btn-outline-danger" mat-raised-button (click)="cerrarForm()">
+      <mat-icon>close</mat-icon>
+      Cancelar
+    </button>
+  </div>
+</form>
+
+<div class="mt-5 text-danger" *ngIf="error">** {{ error }}</div>

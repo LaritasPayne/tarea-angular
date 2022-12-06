@@ -1,0 +1,51 @@
+<mat-toolbar>
+  <a href=""
+    ><img
+      class="px-2"
+      src="../../../assets/img/emprersa35x.jpg"
+      alt="Empresa"
+      routerLink="inicio"
+  /></a>
+  <span class="px-2 text-danger">ACE Software, SA de CV</span>
+
+  <small class="px-3 cursor-text" routerLink="inicio">{{
+    sesion.usuario?.nombre || "Empresa"
+  }}</small>
+  <mat-icon color="cursor-text" *ngIf="ruta != 'inicio'">chevron_right</mat-icon>
+  <small
+    class="px-2 cursor-text"
+    *ngIf="ruta != 'inicio'"
+    (click)="onClickRuta()"
+    >{{ ruta | titlecase }}</small
+  >
+
+  <span class="spacer"></span>
+
+  <button class="btn-usuario" mat-button [matMenuTriggerFor]="menu">
+    <mat-icon color="navy">admin_panel_settings</mat-icon>
+    <span class="px-1">{{ sesion.usuario?.correo || "usuario" }}</span>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="inicio">
+      <mat-icon class="blue">home</mat-icon>
+      <span class="px-1">Inicio ACE Soporte</span>
+    </button>
+    <button mat-menu-item routerLink="usuarios/home">
+      <mat-icon class="blue">person</mat-icon>
+      <span class="px-1">Perfil</span>
+    </button>
+    <button mat-menu-item routerLink="ayuda">
+      <mat-icon class="blue">help</mat-icon>
+      <span class="px-1">Ayuda</span>
+    </button>
+    <button mat-menu-item (click)="cerrarSesion()">
+      <mat-icon color="warn">logout</mat-icon>
+      <span class="px-1">Cerrar sesión</span>
+    </button>
+    <div class="" mat-menu-item>
+      <span class="pe-5 ps-5 text-muted"
+        >ACE Soporte v {{ aceSoporte_version }}</span
+      >
+    </div>
+  </mat-menu>
+</mat-toolbar>
